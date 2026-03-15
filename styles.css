@@ -21,7 +21,7 @@
 
 body {
   margin: 0;
-  min-height: 100vh;
+  min-height: 100dvh;
   display: grid;
   place-items: center;
   font-family: "Space Grotesk", "Segoe UI", sans-serif;
@@ -30,8 +30,10 @@ body {
     radial-gradient(circle at 14% 18%, rgba(255, 168, 181, 0.35), transparent 22%),
     radial-gradient(circle at 83% 84%, rgba(22, 130, 255, 0.28), transparent 28%),
     linear-gradient(140deg, #03215f 0%, #021b4f 35%, #01133f 65%, #022a75 100%);
-  overflow: hidden;
+  overflow-x: hidden;
   position: relative;
+  padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right))
+    max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
 }
 
 body::before,
@@ -76,8 +78,12 @@ body::after {
 .page {
   position: relative;
   z-index: 1;
+  width: min(94vw, 620px);
   text-align: center;
-  padding: 2rem 1rem;
+  padding: clamp(1.2rem, 2.4vw, 2rem) clamp(0.8rem, 2vw, 1.6rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   animation: fade-in 0.65s ease-out;
 }
 
@@ -92,9 +98,38 @@ h1 {
   text-shadow: 0 4px 20px rgba(15, 23, 42, 0.5);
 }
 
+.mode-toggle {
+  margin: 0 0 1.25rem;
+  border: 1px solid rgba(232, 238, 247, 0.55);
+  background: rgba(5, 18, 56, 0.55);
+  color: #f8fbff;
+  padding: 0.55rem 1rem;
+  font: 600 0.9rem/1 "Space Grotesk", "Segoe UI", sans-serif;
+  letter-spacing: 0.04em;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.25);
+  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.mode-toggle:hover {
+  transform: translateY(-1px);
+  background: rgba(12, 38, 98, 0.72);
+  border-color: rgba(191, 219, 254, 0.9);
+}
+
+.mode-toggle:active {
+  transform: translateY(0);
+}
+
+.mode-toggle:focus-visible {
+  outline: 3px solid rgba(56, 189, 248, 0.65);
+  outline-offset: 2px;
+}
+
 .watch {
   position: relative;
-  width: min(80vw, 320px);
+  width: min(78vw, 430px);
   aspect-ratio: 1 / 1;
   border: 10px solid var(--watch-border);
   border-radius: 50%;
@@ -237,9 +272,9 @@ h1 {
 }
 
 .digital {
-  margin: 1.15rem 0 0;
+  margin: clamp(1rem, 2vh, 1.25rem) 0 0;
   font-family: "Syne", "Space Grotesk", sans-serif;
-  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  font-size: clamp(1.1rem, 2.3vw, 1.65rem);
   font-weight: 700;
   letter-spacing: 0.13em;
   color: #ffffff;
@@ -248,12 +283,33 @@ h1 {
 
 .date-display {
   margin: 0.35rem 0 0;
-  font-size: clamp(0.82rem, 2.1vw, 1rem);
+  font-size: clamp(0.86rem, 1.8vw, 1.06rem);
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: rgba(232, 238, 247, 0.92);
   text-shadow: 0 2px 10px rgba(15, 23, 42, 0.35);
+}
+
+.page.digital-mode .watch {
+  display: none;
+}
+
+.page.digital-mode .digital {
+  margin-top: 0.6rem;
+  padding: clamp(0.75rem, 1.5vw, 1rem) clamp(1.1rem, 2.3vw, 1.6rem);
+  border-radius: 14px;
+  background: rgba(3, 20, 58, 0.58);
+  border: 1px solid rgba(191, 219, 254, 0.45);
+  font-size: clamp(2rem, 7.5vw, 4.6rem);
+  letter-spacing: 0.14em;
+  box-shadow: 0 12px 30px rgba(2, 6, 23, 0.35);
+}
+
+.page.digital-mode .date-display {
+  margin-top: 0.7rem;
+  font-size: clamp(0.95rem, 2.6vw, 1.2rem);
+  letter-spacing: 0.08em;
 }
 
 @keyframes fade-in {
@@ -269,14 +325,39 @@ h1 {
 
 @media (max-width: 420px) {
   .page {
-    padding-top: 1.5rem;
+    width: 100%;
+    padding: 1.1rem 0.5rem;
   }
 
   .watch {
+    width: min(88vw, 355px);
     border-width: 8px;
+  }
+
+  .mode-toggle {
+    font-size: 0.82rem;
+    padding: 0.5rem 0.86rem;
   }
 
   .mark {
     height: 14px;
+  }
+
+  .digital {
+    letter-spacing: 0.1em;
+  }
+
+  .page.digital-mode .digital {
+    font-size: clamp(1.9rem, 11vw, 2.8rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .watch {
+    width: min(58vw, 470px);
+  }
+
+  h1 {
+    margin-bottom: 1.4rem;
   }
 }

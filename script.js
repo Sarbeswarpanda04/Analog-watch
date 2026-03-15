@@ -3,6 +3,8 @@ const minuteHand = document.getElementById("minute-hand");
 const secondHand = document.getElementById("second-hand");
 const digitalTime = document.getElementById("digital-time");
 const dateDisplay = document.getElementById("date-display");
+const page = document.querySelector(".page");
+const modeToggle = document.getElementById("mode-toggle");
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
   weekday: "long",
@@ -13,6 +15,12 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
 
 function pad(value) {
   return String(value).padStart(2, "0");
+}
+
+function setMode(isDigital) {
+  page.classList.toggle("digital-mode", isDigital);
+  modeToggle.setAttribute("aria-pressed", String(isDigital));
+  modeToggle.textContent = isDigital ? "Switch to Analog" : "Switch to Digital";
 }
 
 function updateWatch() {
@@ -36,3 +44,8 @@ function updateWatch() {
 
 updateWatch();
 setInterval(updateWatch, 1000);
+
+modeToggle.addEventListener("click", () => {
+  const isDigital = !page.classList.contains("digital-mode");
+  setMode(isDigital);
+});
