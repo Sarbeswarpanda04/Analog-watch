@@ -96,6 +96,22 @@ function setMode(isDigital) {
   setStoredBoolean(STORAGE_KEYS.mode, isDigital);
 }
 
+function toggleModeWithTransition(nextIsDigital) {
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (prefersReducedMotion) {
+    setMode(nextIsDigital);
+    return;
+  }
+
+  page.classList.add("is-switching");
+  setMode(nextIsDigital);
+
+  window.setTimeout(() => {
+    page.classList.remove("is-switching");
+  }, 520);
+}
+
 function setTickSound(enabled) {
   isTickSoundOn = enabled;
   soundToggle.setAttribute("aria-pressed", String(enabled));
@@ -254,7 +270,7 @@ updateClock();
 
 modeToggle.addEventListener("click", () => {
   const isDigital = !page.classList.contains("digital-mode");
-  setMode(isDigital);
+  toggleModeWithTransition(isDigital);
 });
 
 soundToggle.addEventListener("click", () => {
