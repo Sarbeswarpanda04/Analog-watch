@@ -98,8 +98,16 @@ h1 {
   text-shadow: 0 4px 20px rgba(15, 23, 42, 0.5);
 }
 
-.mode-toggle {
+.control-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 0.7rem;
   margin: 0 0 1.25rem;
+  flex-wrap: wrap;
+}
+
+.mode-toggle {
   border: 1px solid rgba(232, 238, 247, 0.55);
   background: rgba(5, 18, 56, 0.55);
   color: #f8fbff;
@@ -112,17 +120,50 @@ h1 {
   transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
+.sound-toggle {
+  border: 1px solid rgba(191, 219, 254, 0.5);
+  background: rgba(8, 30, 74, 0.55);
+  color: #f8fbff;
+  padding: 0.55rem 1rem;
+  font: 600 0.9rem/1 "Space Grotesk", "Segoe UI", sans-serif;
+  letter-spacing: 0.04em;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.2);
+  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
 .mode-toggle:hover {
   transform: translateY(-1px);
   background: rgba(12, 38, 98, 0.72);
   border-color: rgba(191, 219, 254, 0.9);
 }
 
+.sound-toggle:hover {
+  transform: translateY(-1px);
+  background: rgba(19, 53, 122, 0.72);
+  border-color: rgba(147, 197, 253, 0.95);
+}
+
 .mode-toggle:active {
   transform: translateY(0);
 }
 
+.sound-toggle:active {
+  transform: translateY(0);
+}
+
+.sound-toggle[aria-pressed="true"] {
+  background: rgba(8, 48, 101, 0.9);
+  border-color: rgba(147, 197, 253, 1);
+}
+
 .mode-toggle:focus-visible {
+  outline: 3px solid rgba(56, 189, 248, 0.65);
+  outline-offset: 2px;
+}
+
+.sound-toggle:focus-visible {
   outline: 3px solid rgba(56, 189, 248, 0.65);
   outline-offset: 2px;
 }
@@ -291,6 +332,71 @@ h1 {
   text-shadow: 0 2px 10px rgba(15, 23, 42, 0.35);
 }
 
+.timezone-display {
+  margin: 0.45rem 0 0;
+  font-size: clamp(0.78rem, 1.7vw, 0.95rem);
+  color: rgba(191, 219, 254, 0.95);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.weather-widget {
+  margin-top: 1rem;
+  width: min(92vw, 460px);
+  border: 1px solid rgba(191, 219, 254, 0.42);
+  background: rgba(3, 20, 58, 0.52);
+  border-radius: 16px;
+  padding: 0.8rem 1rem;
+  box-shadow: 0 12px 28px rgba(2, 6, 23, 0.3);
+  backdrop-filter: blur(4px);
+}
+
+.weather-widget h2 {
+  margin: 0;
+  font-family: "Syne", "Space Grotesk", sans-serif;
+  font-size: clamp(0.9rem, 2.1vw, 1.05rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #dbeafe;
+}
+
+.weather-content {
+  margin-top: 0.62rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+}
+
+.weather-icon {
+  font-size: clamp(1.9rem, 4.8vw, 2.5rem);
+  line-height: 1;
+  filter: drop-shadow(0 3px 6px rgba(2, 6, 23, 0.35));
+}
+
+.weather-meta {
+  text-align: left;
+}
+
+.weather-temp,
+.weather-humidity,
+.weather-status {
+  margin: 0;
+}
+
+.weather-temp {
+  font-family: "Syne", "Space Grotesk", sans-serif;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  letter-spacing: 0.04em;
+}
+
+.weather-humidity,
+.weather-status {
+  margin-top: 0.14rem;
+  font-size: clamp(0.78rem, 1.8vw, 0.95rem);
+  color: #dbeafe;
+}
+
 .page.digital-mode .watch {
   display: none;
 }
@@ -310,6 +416,10 @@ h1 {
   margin-top: 0.7rem;
   font-size: clamp(0.95rem, 2.6vw, 1.2rem);
   letter-spacing: 0.08em;
+}
+
+.page.digital-mode .weather-widget {
+  margin-top: 1.2rem;
 }
 
 @keyframes fade-in {
@@ -334,9 +444,15 @@ h1 {
     border-width: 8px;
   }
 
-  .mode-toggle {
+  .mode-toggle,
+  .sound-toggle {
     font-size: 0.82rem;
     padding: 0.5rem 0.86rem;
+  }
+
+  .control-row {
+    gap: 0.5rem;
+    margin-bottom: 0.95rem;
   }
 
   .mark {
@@ -349,6 +465,15 @@ h1 {
 
   .page.digital-mode .digital {
     font-size: clamp(1.9rem, 11vw, 2.8rem);
+  }
+
+  .weather-widget {
+    width: min(94vw, 390px);
+    padding: 0.72rem 0.8rem;
+  }
+
+  .weather-content {
+    gap: 0.65rem;
   }
 }
 

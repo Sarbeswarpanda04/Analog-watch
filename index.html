@@ -9,9 +9,14 @@
 <body>
   <main class="page">
     <h1>Analog Watch</h1>
-    <button class="mode-toggle" id="mode-toggle" type="button" aria-pressed="false">
-      Switch to Digital
-    </button>
+    <div class="control-row">
+      <button class="mode-toggle" id="mode-toggle" type="button" aria-pressed="false">
+        Switch to Digital
+      </button>
+      <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="false">
+        Tick Sound: Off
+      </button>
+    </div>
 
     <div class="watch" aria-label="Analog watch showing current time">
       <div class="center-dot"></div>
@@ -43,6 +48,19 @@
 
     <p class="digital" id="digital-time">00:00:00</p>
     <p class="date-display" id="date-display">Sunday, 15 March 2026</p>
+    <p class="timezone-display" id="timezone-display">Time Zone: --</p>
+
+    <section class="weather-widget" aria-label="Current weather">
+      <h2>Local Weather</h2>
+      <div class="weather-content" id="weather-content">
+        <span class="weather-icon" id="weather-icon" aria-hidden="true">--</span>
+        <div class="weather-meta">
+          <p class="weather-temp" id="weather-temp">--</p>
+          <p class="weather-humidity" id="weather-humidity">Humidity: --</p>
+          <p class="weather-status" id="weather-status">Getting weather...</p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <script src="script.js"></script>
